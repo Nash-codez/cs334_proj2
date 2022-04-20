@@ -1,7 +1,6 @@
 from django.db import models
 import string
 import random
-import datetime
 
 # Generates a random unique code for the group 
 def gen_unique_code():

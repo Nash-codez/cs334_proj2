@@ -6,6 +6,6 @@ export default class GroupPage extends Component {
     }
 
     render() {
-        return <p>This is the group page</p>;
+        return <div>This is the group page</div>;
     }
 }

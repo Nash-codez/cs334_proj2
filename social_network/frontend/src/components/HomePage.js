@@ -1,12 +1,25 @@
+import { Box, Container, CssBaseline, Grid, Paper, styled } from "@material-ui/core";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, Redirect } from "react-router-dom";
+import NavBar from "../pages/NavBar";
 
-export default class HomePage extends Component {
-    constructor(props) {
-        super(props);
-    }
 
-    render() {
-        return <div>This is the Home Page!!</div>;
-    }
+export default function Homepage(){
+
+        return (
+            <div className="background">
+                <div className="home-row-wrapper">
+                    <div className="top">
+                        Navigation Bar
+                    </div>
+                    <div className="home-col-wrapper">
+                        <div className="home-left">
+                            THIS IS THE BOTTOM PART YA DIG!!
+                        </div>
+                        <div className="home-right">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </div>
+                    </div>
+                </div>
+           </div>
+        );
 }

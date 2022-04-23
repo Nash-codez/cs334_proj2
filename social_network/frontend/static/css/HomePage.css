@@ -7,21 +7,23 @@
 
 .home-row-wrapper{
     display: grid;
-    grid-template-rows: 6% 94%;
+    grid-template-rows: 1fr 15fr;
 }
 
 .top {
     display: flex;
     justify-content: center;
     align-content: center;
+    max-height: 1fr;
 }
 
 .home-col-wrapper {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 1fr 5fr;
 }
 
 .home-col-wrapper > div {
+    background: none;
     padding: 1em;
 }
 
@@ -36,4 +38,7 @@
 
 .home-right {
     display: flex;
+    overflow-x: unset;
+    overflow-y: auto;
 }
+

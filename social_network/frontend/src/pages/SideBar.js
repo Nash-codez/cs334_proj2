@@ -8,7 +8,9 @@ import {
   Checkbox,
   styled,
   Fab,
-  Box
+  Box,
+  Stack,
+  CardHeader
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add'
 
@@ -77,25 +79,28 @@ export default function SideBar() {
   return (
     <div className='sidebar-wrapper'>
       <Card className='card' raised='true' sx={{ width: '100%', height: '100%' }}>
+        <CardHeader
+            title="Filters"
+            sx={{ pl: 9, pt: 5, pb: 0 }}
+        />
         <CardContent>
-          <Typography align='center' variant='h5' color='text.primary'>
-            Filters
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', pt: 2, pb: 5 }}>
-            <FormGroup sx={{ justifySelf: 'center', align: 'center' }}>
-              <FormControlLabel control={<BpCheckbox />} label="Label 1" />
-              <FormControlLabel control={<BpCheckbox />} label="Label 2" />
-              <FormControlLabel control={<BpCheckbox />} label="Label 3" />
-              <FormControlLabel control={<BpCheckbox />} label="Label 4" />
-              <FormControlLabel control={<BpCheckbox />} label="Label 5" />
-              <FormControlLabel control={<BpCheckbox />} label="Label 6" />
-              <FormControlLabel control={<BpCheckbox />} label="Label 7" />
-            </FormGroup>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Stack spacing={5}>
+              <FormGroup sx={{ justifySelf: 'center', align: 'center' }}>
+                <FormControlLabel control={<BpCheckbox />} label="Label 1" />
+                <FormControlLabel control={<BpCheckbox />} label="Label 2" />
+                <FormControlLabel control={<BpCheckbox />} label="Label 3" />
+                <FormControlLabel control={<BpCheckbox />} label="Label 4" />
+                <FormControlLabel control={<BpCheckbox />} label="Label 5" />
+                <FormControlLabel control={<BpCheckbox />} label="Label 6" />
+                <FormControlLabel control={<BpCheckbox />} label="Label 7" />
+              </FormGroup>
+              <Fab variant="extended" size="medium" color="secondary" aria-label="add">
+                <AddIcon sx={{ mr: 1 }} />
+                Create Group
+              </Fab>
+            </Stack>
           </Box>
-          <Fab variant="extended" size="medium" color="secondary" aria-label="add">
-            <AddIcon sx={{ mr: 1 }} />
-            Create
-          </Fab>
         </CardContent>
       </Card>
     </div>

@@ -24,7 +24,7 @@ export default function NavBar() {
      <AppBar color='secondary' position='sticky'>
         <Toolbar disableGutters sx={{ order: 0, display: 'flex', position:'sticky' }}>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Link to="/"><img className='logo' src='../../static/images/myapplogo.png' alt='logo'></img></Link>
+              <Link to="/home"><img className='logo' src='../../static/images/myapplogo.png' alt='logo'></img></Link>
             </Box>
             
               <ButtonGroup

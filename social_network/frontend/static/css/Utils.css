@@ -27,3 +27,23 @@
     min-width: 100%;
     justify-content: center;
 }
+
+.reg-paper {
+    margin: 3em auto;
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-top: 1.5em;
+    padding-bottom: 3em;
+    width: 30%;
+    height: 70%;
+}
+
+.login-paper {
+    margin: 5em auto;
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-top: 1.5em;
+    padding-bottom: 5em;
+    width: 25%;
+    height: 70%;
+}

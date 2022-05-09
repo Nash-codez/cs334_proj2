@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Link, Redirect } from "react-ro
 import HomePage from "./HomePage";
 import Login from "./Login";
 import GroupPage from "./GroupPage";
+import LandingPage from "./LandingPage";
+import Register from "./Register";
 
 export default class App extends Component {
     constructor(props) {
@@ -14,9 +16,11 @@ export default class App extends Component {
         return (
             <Router>
                  <Routes>
-                    <Route exact path="/" element={<HomePage/>} />
+                    <Route exact path="/" element={<LandingPage/>} />
+                    <Route exact path="/home" element={<HomePage/>} />
                     <Route exact path="/login" element={<Login/>} />
                     <Route exact path="/groups" element={<GroupPage/>} />
+                    <Route exact path="/registration" element={<Register/>} />
                 </Routes>
             </Router>
         );

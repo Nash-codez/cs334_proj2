@@ -10,9 +10,19 @@ import {
   Fab,
   Box,
   Stack,
-  CardHeader
+  CardHeader,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+  Button,
+  Autocomplete,
+  IconButton,
+  Avatar
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add'
+import AddIcon from '@material-ui/icons/Add';
+import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternate'
 
 const BpIcon = styled('span')(({ theme }) => ({
   borderRadius: 3,
@@ -76,6 +86,16 @@ function BpCheckbox(props) {
 }
 
 export default function SideBar() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className='sidebar-wrapper'>
       <Card className='card' raised='true' sx={{ width: '100%', height: '100%' }}>
@@ -95,10 +115,67 @@ export default function SideBar() {
                 <FormControlLabel control={<BpCheckbox />} label="Label 6" />
                 <FormControlLabel control={<BpCheckbox />} label="Label 7" />
               </FormGroup>
-              <Fab variant="extended" size="medium" color="secondary" aria-label="add">
-                <AddIcon sx={{ mr: 1 }} />
-                Create Group
-              </Fab>
+              <div>
+                <Fab variant="extended" size="medium" color="secondary" aria-label="add" onClick={handleClickOpen}>
+                  <AddIcon sx={{ mr: 1 }} />
+                  Create Group
+                </Fab>
+                <Dialog open={open} onClose={handleClose} sx={{ overflowY: 'visible' }}>
+                  <DialogTitle>Create A Group</DialogTitle>
+                  <DialogContent>
+                    <Stack direction='row' spacing={3} sx={{ pb: 1.5 }}>
+                      <Avatar sx={{ width: 58, height: 58}}>
+                      <IconButton>
+                        <AddPhotoAlternate fontSize='large'/>
+                      </IconButton>
+                      </Avatar>
+                      <TextField
+                        autoFocus
+                        required
+                        margin='dense'
+                        id='name'
+                        label="Group Name"
+                        type="text"
+                        variant='standard'
+                        color="secondary"
+                        size='small'
+                      />
+                    </Stack>
+                    <Typography variant='caption'>Please select 3 different categories that best describe your group.</Typography>
+                    <Autocomplete
+                      disablePortal
+                      id="cat-combo-box"
+                      options={categories}
+                      sx={{ width: '50%', pb: 1}}
+                      renderInput={(params) => <TextField {...params} label="Category 1" />}
+                      size="small"
+                      color='secondary'
+                    />
+                    <Autocomplete
+                      disablePortal
+                      id="cat-combo-box"
+                      options={categories}
+                      sx={{ width: '50%', pb: 1}}
+                      renderInput={(params) => <TextField {...params} label="Category 2" />}
+                      size="small"
+                      color='secondary'
+                    />
+                    <Autocomplete
+                      disablePortal
+                      id="cat-combo-box"
+                      options={categories}
+                      sx={{ width: '50%'}}
+                      renderInput={(params) => <TextField {...params} label="Category 3" />}
+                      size="small"
+                      color='secondary'
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose} color="secondary">Cancel</Button>
+                    <Button onClick={handleClose} color="secondary">Create</Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
             </Stack>
           </Box>
         </CardContent>
@@ -106,3 +183,13 @@ export default function SideBar() {
     </div>
   )
 }
+
+//random list of categories
+const categories = [
+  { label: 'News', id: 1 },
+  { label: 'Marvel', id: 2 },
+  { label: 'Comedy', id: 3 },
+  { label: 'Memes', id: 4 },
+  { label: 'Soccer', id: 5 },
+  { label: 'Formula 1', id: 6 },
+];

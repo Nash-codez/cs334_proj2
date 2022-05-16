@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Typography, 
   Card, 
@@ -19,7 +19,8 @@ import {
   Button,
   Autocomplete,
   IconButton,
-  Avatar
+  Avatar,
+  Input
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternate'
@@ -86,6 +87,32 @@ function BpCheckbox(props) {
 }
 
 export default function SideBar() {
+  const [profPic, setProfPic] = React.useState(null);
+  const [groupName, setGroupName] = React.useState('');
+  const [cat1, setCat1] = React.useState('');
+  const [cat2, setCat2] = React.useState('');
+  const [cat3, setCat3] = React.useState('');
+
+  const handleGroupNameChange = (e) => {
+    setGroupName(e.target.value[0]);
+  };
+
+  const handleProfPicChange = (event) => {
+    setProfPic(event.target.files[0]);
+  };
+
+  const handleCat1Change = (event, value) => {
+    setCat1(value.label);
+  };
+
+  const handleCat2Change = (event, value) => {
+    setCat2(value.label);
+  };
+
+  const handleCat3Change = (event, value) => {
+    setCat3(value.label);
+  };
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -94,6 +121,26 @@ export default function SideBar() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCreateGroup = () => {
+    const gdata = new FormData();
+    gdata.append('prof_pic', profPic);
+    
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        
+        group_name: groupName,
+        category1: cat1,
+        category2: cat2,
+        category3: cat3
+      })
+    };
+    fetch('/api/create-group', requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   };
 
   return (
@@ -124,11 +171,22 @@ export default function SideBar() {
                   <DialogTitle>Create A Group</DialogTitle>
                   <DialogContent>
                     <Stack direction='row' spacing={3} sx={{ pb: 1.5 }}>
-                      <Avatar sx={{ width: 58, height: 58}}>
-                      <IconButton>
-                        <AddPhotoAlternate fontSize='large'/>
-                      </IconButton>
-                      </Avatar>
+                      <React.Fragment>
+                        <input 
+                          accept="image/*"
+                          id="group-prof-pic"
+                          type="file"
+                          style={{ display: 'none' }}
+                          onInput={handleProfPicChange}
+                        />
+                        <label htmlFor="group-prof-pic">
+                          <Avatar sx={{ width: 58, height: 58}}>
+                            <IconButton aria-label="upload group picture" component="span">
+                              <AddPhotoAlternate fontSize='large'/>
+                            </IconButton>
+                          </Avatar>
+                        </label>
+                      </React.Fragment>
                       <TextField
                         autoFocus
                         required
@@ -139,6 +197,7 @@ export default function SideBar() {
                         variant='standard'
                         color="secondary"
                         size='small'
+                        onChange={handleGroupNameChange}
                       />
                     </Stack>
                     <Typography variant='caption'>Please select 3 different categories that best describe your group.</Typography>
@@ -150,6 +209,8 @@ export default function SideBar() {
                       renderInput={(params) => <TextField {...params} label="Category 1" />}
                       size="small"
                       color='secondary'
+                      getOptionLabel={(option) => option.label}
+                      onChange={handleCat1Change}
                     />
                     <Autocomplete
                       disablePortal
@@ -159,6 +220,8 @@ export default function SideBar() {
                       renderInput={(params) => <TextField {...params} label="Category 2" />}
                       size="small"
                       color='secondary'
+                      getOptionLabel={(option) => option.label}
+                      onChange={handleCat2Change}
                     />
                     <Autocomplete
                       disablePortal
@@ -168,11 +231,13 @@ export default function SideBar() {
                       renderInput={(params) => <TextField {...params} label="Category 3" />}
                       size="small"
                       color='secondary'
+                      getOptionLabel={(option) => option.label}
+                      onChange={handleCat3Change}
                     />
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose} color="secondary">Cancel</Button>
-                    <Button onClick={handleClose} color="secondary">Create</Button>
+                    <Button onClick={handleCreateGroup} color="secondary">Create</Button>
                   </DialogActions>
                 </Dialog>
               </div>
